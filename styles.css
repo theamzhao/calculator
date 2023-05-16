@@ -39,6 +39,7 @@ body {
     flex-wrap: wrap;
     flex-direction: row;
     width: 200px;
+    justify-content: center;
 }
 
 button {
@@ -47,8 +48,8 @@ button {
 
 #zero {
     padding: 10px 50px;
-
 }
+
 .functions {
     display: flex;
     flex-wrap: wrap;
