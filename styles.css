@@ -103,7 +103,7 @@ button:hover {
 
 a {
     text-decoration: none;
-    color: rgb(57, 91, 123);
+    color: rgb(219, 141, 15);
 }
 
 .footer {
@@ -115,7 +115,7 @@ a {
     gap: 12px;
     height: 50px;
     width: 100%;
-    background-color: aliceblue;
+    background-color: rgb(255, 249, 240);
     text-align: center;
 }
 
