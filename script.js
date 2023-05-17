@@ -3,6 +3,7 @@ const numbers = document.querySelectorAll('.numbers button');
 const functions = document.querySelectorAll('.functions button');
 const display = document.querySelector('.display');
 const clear = document.querySelector('#clear');
+const neg = document.querySelector('#neg');
 display.textContent = '0';
 const calcArray = [0];
 const funcArray = ['/','*','-','+','=','Clear'];
@@ -11,6 +12,7 @@ var evalFlag = 0;
 numbers.forEach((button) => button.addEventListener('click', addNumbers));
 functions.forEach((button) => button.addEventListener('click', addFunctions));
 clear.addEventListener('click',clearAll);
+neg.addEventListener('click',negate);
 
 // FUNCTIONS
 function addNumbers() {
@@ -18,14 +20,17 @@ function addNumbers() {
     if (display.textContent == '0'){ 
         display.textContent = this.textContent;
         calcArray[0] = this.textContent;
-    } else if (this.textContent == 'C'){
+    } else if (this.textContent == 'C' || this.textContent == '+/-'){
         // add one more case if a function is clicked and current value is 0 to keep 0
     } else if (evalFlag == 1){
         display.textContent = this.textContent;
         calcArray[0] = this.textContent;
         evalFlag = 0;
     } else if (funcArray.includes(calcArray[endIndex])){
-        functions.forEach((button) => button.style.backgroundColor = '#ffa500');
+        functions.forEach((button) => {
+            button.style.backgroundColor = '#ffa500';
+            button.style.color = '#ffffff';
+        });
         display.textContent = this.textContent;
         calcArray.push(this.textContent);
         console.log(calcArray);
@@ -79,4 +84,17 @@ function evaluateArray() {
 function clearAll() {
     calcArray.forEach(() => calcArray.shift());
     display.textContent = '0';
+}
+
+function negate() {
+    // if the latest value in the array is pos, then add - to front
+    // if latest value in array is neg, then remove - from front
+    let endIndex = calcArray.length-1;
+    if (calcArray[endIndex] > 0) {
+        calcArray[endIndex] = '-' + calcArray[endIndex];
+        display.textContent = '-' + display.textContent;
+    } else if (calcArray[endIndex] < 0) {
+        calcArray[endIndex].replace('-','');
+        display.textContent.replace('-','');
+    }
 }
