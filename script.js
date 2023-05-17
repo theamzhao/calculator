@@ -4,15 +4,17 @@ const functions = document.querySelectorAll('.functions button');
 const display = document.querySelector('.display');
 const clear = document.querySelector('#clear');
 const neg = document.querySelector('#neg');
-display.textContent = '0';
+const perc = document.querySelector('#perc');
 const calcArray = [0];
 const funcArray = ['/','*','-','+','=','Clear'];
+display.textContent = '0';
 var evalFlag = 0;
 
 numbers.forEach((button) => button.addEventListener('click', addNumbers));
 functions.forEach((button) => button.addEventListener('click', addFunctions));
 clear.addEventListener('click',clearAll);
 neg.addEventListener('click',negate);
+perc.addEventListener('click',percentage);
 
 // FUNCTIONS
 function addNumbers() {
@@ -20,7 +22,7 @@ function addNumbers() {
     if (display.textContent == '0'){ 
         display.textContent = this.textContent;
         calcArray[0] = this.textContent;
-    } else if (this.textContent == 'C' || this.textContent == '+/-'){
+    } else if (this.textContent == 'C' || this.textContent == '+/-' || this.textContent == '%'){
         // add one more case if a function is clicked and current value is 0 to keep 0
     } else if (evalFlag == 1){
         display.textContent = this.textContent;
@@ -75,7 +77,7 @@ function evaluateArray() {
             evaluation += input;
         }
     });
-    evaluation = eval(evaluation); // if this catches a decimal value, the float will start to make weird numbers
+    evaluation = parseFloat(eval(evaluation).toFixed(8)); 
     display.textContent = evaluation;
     calcArray.forEach(() => calcArray.shift());
     calcArray[0] = evaluation.toString();
@@ -87,14 +89,20 @@ function clearAll() {
 }
 
 function negate() {
-    // if the latest value in the array is pos, then add - to front
-    // if latest value in array is neg, then remove - from front
     let endIndex = calcArray.length-1;
-    if (calcArray[endIndex] > 0) {
-        calcArray[endIndex] = '-' + calcArray[endIndex];
+    if (parseInt(calcArray[endIndex]) > 0) {
+        calcArray[endIndex] = '(-' + calcArray[endIndex] + ')';
         display.textContent = '-' + display.textContent;
-    } else if (calcArray[endIndex] < 0) {
-        calcArray[endIndex].replace('-','');
-        display.textContent.replace('-','');
+    } else if (parseInt(calcArray[endIndex]) < 0) {
+        calcArray[endIndex] = calcArray[endIndex].replace('(-','');
+        calcArray[endIndex] = calcArray[endIndex].replace(')','');
+        display.textContent = display.textContent.replace('-','');
     }
+}
+
+function percentage() {
+    let endIndex = calcArray.length-1;
+    let divValue = (display.textContent/100).toString();
+    calcArray[endIndex] = divValue;
+    display.textContent = divValue;
 }
