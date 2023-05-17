@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: #dadada;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .content {
@@ -11,13 +12,13 @@ body {
 }
 
 h1 {
-    font-family: ;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
+    text-align: center;
 }
 
 .calc {
     background-color: #000000;
     color: white;
-    font-family: 'Courier New', Courier, monospace;
     display: flex;
     flex-direction: column;
     align-items:center;
@@ -57,11 +58,11 @@ h1 {
 button {
     background-color: #686868;
     color: #ffffff;
-    font-size: larger;
+    font-size: 24px;
+    font-weight: lighter;
     width: 60px;
     height: 60px;
     padding: 10px 10px;
-    font-family: 'Courier New', Courier, monospace;
     border-radius: 100%;
     border-width: 0px;
     transition-duration: 0.4s;
@@ -75,6 +76,7 @@ button:hover {
     padding: 10px;
     background-color: #ffa500;
     color: white;
+    font-size: 24px;
     font-weight: bolder;
 }
 
@@ -91,4 +93,33 @@ button:hover {
     flex-wrap: wrap;
     flex-direction: column;
     gap: 5px;
+}
+
+.gitlogo {
+    display: flex;
+    align-items: center;
+    width: 50px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(57, 91, 123);
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 50px;
+    width: 100%;
+    background-color: aliceblue;
+    text-align: center;
+}
+
+img {
+    max-width: 30%;
+    height: auto;
 }
